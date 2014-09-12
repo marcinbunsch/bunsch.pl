@@ -261,8 +261,8 @@ a:focus {
   -ms-backface-visibility: hidden;
   backface-visibility: hidden;
   float: left;
-  margin-right: 10px;
-  margin-top: -8px;
+  margin-right: 20px;
+  margin-top: -3px;
 }
 
 .masthead h1 {
@@ -354,7 +354,8 @@ a:focus {
     padding-bottom: 40px;
   }
   .masthead img.profile {
-    float: none
+    float: none;
+    margin-bottom: 20px;
   }
   .masthead h1 {
     font-size: 30px;
@@ -474,6 +475,7 @@ a:focus {
   display: block;
   color: #9a9a9a;
   font-size: 13px;
+  margin-left: 2px;
 }
 
 /* Related posts */
