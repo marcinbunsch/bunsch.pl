@@ -1,0 +1,13 @@
+title:        Marcin Bunsch
+tagline:      'programming is hard'
+description:  'wat'
+url:          http://bunsch.pl
+version:      1.0.0
+author:
+  name:       'marcinbunsch'
+  email:      'marcin.bunsch@gmail.com'
+markdown:     rdiscount
+permalink:    pretty
+highlighter:  pygments
+paginate:     5
+
