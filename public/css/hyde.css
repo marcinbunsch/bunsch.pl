@@ -240,8 +240,6 @@ a:focus {
 .masthead {
   color: #fff;
   background-color: #2a2a2a;
-  background-image: url("../images/bg2.jpg");
-  background-position: -300px -480px;
 }
 .masthead-inner {
   padding: 20px;
@@ -335,13 +333,14 @@ a:focus {
 @media (min-width: 990px) {
   /* Fix the masthead to the side for impact and awesomeness */
   .masthead {
-    background-position: -850px 0px;
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     width: 25%;
     margin-bottom: 0;
+  background-image: url("../images/bg4.jpg");
+  background-size: cover;
   }
   .masthead-inner {
     position: absolute;
