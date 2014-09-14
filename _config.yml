@@ -10,4 +10,8 @@ markdown:     rdiscount
 permalink:    pretty
 highlighter:  pygments
 paginate:     5
+exclude:
+  - README.md
+  - LICENSE.md
+  - Makefile
 
