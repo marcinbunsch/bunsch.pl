@@ -366,6 +366,8 @@ a:focus {
   .masthead img.profile {
     float: none;
     margin-bottom: 20px;
+    width: 100px;
+    height: 100px;
   }
   .masthead h1 {
     font-size: 30px;
@@ -396,6 +398,7 @@ a:focus {
     -webkit-box-shadow: none;
     box-shadow: none;
     max-height: 80px
+    max-width: 80px
   }
   .single-post .masthead-inner .title {
     display: block;
@@ -650,4 +653,24 @@ a:focus {
 .theme-base-0f .container a,
 .theme-base-0f .related-posts li a:hover {
   color: #8f5536;
+}
+
+
+/* Specific post support */
+
+.dotz-demo {
+  text-align: center;
+  margin: 0 auto;
+  width: 100px;
+  margin-bottom: 10px;
+}
+
+.dotz-demo button {
+  margin-bottom: 10px;
+  font-size: 15px;
+  width: 100px;
+
+}
+.dotz-demo div {
+  border: 1px solid #ccc;
 }
