@@ -12,8 +12,16 @@ layout: default
       </a>
     </h2>
 
-
-    {{ post.content }}
+    <div class="post-content-truncate">
+      {% if post.content contains "<!-- more -->" %}
+        {{ post.content | split:"<!-- more -->" | first % }}
+        <a href="{{ post.url }}">
+          Continue reading &gt;
+        </a>
+      {% else %}
+        {{ post.content }}
+      {% endif %}
+    </div>
   </div>
   {% endfor %}
 </div>
