@@ -3,7 +3,7 @@ layout: post
 title: Building Offline Mobile HTML5 apps
 ---
 
-Recently, at the Base Lab Hackathon, I've been playing around with building a mobile app in HTML5 with offline support. There's a lot of material on the subject scattered all over the web. I wanted a single place where I could find all this information, to I wrote everyting down with links, and here it is.
+Recently, at the [Base Lab](http://lab.getbase.com) Hackathon, I've been playing around with building a mobile app in HTML5 with offline support. There's a lot of material on the subject scattered all over the web. I wanted a single place where I could find all this information, to I wrote everyting down with links, and here it is.
 
 I also built a demo which supports everything I write about in this post. You can see it working at [http://marcinbunsch.github.io/offline-mobile-html5-demo/](http://marcinbunsch.github.io/offline-mobile-html5-demo/) and the source code is available [here](https://github.com/marcinbunsch/offline-mobile-html5-demo). Make sure you view it on a mobile and use "Add to home screen" feature for best experience.
 
