@@ -13,7 +13,7 @@ An ideal mobile app is fast and snappy. Lowering the number of resources will dr
 
 As much as I love jQuery, [zepto.js](http://zeptojs.com/) is a much better alternative for mobile HTML5 apps. It's 9kb gzipped and has a largely jQuery-compatible API.
 
-Don't bring in Bootstrap. It's huge and you most likely won't use most of it (see [Addy Osmani's presentation on CSS Performance Tooling](https://speakerdeck.com/addyosmani/css-performance-tooling). Either use something smaller, like [Pure](http://purecss.io/) and [Picnic](http://picnicss.com/), or roll your own. You're on a much smaller screen, with less clutter - you need less boilerplate.
+Don't bring in Bootstrap. It's huge and you most likely won't use most of it (see [Addy Osmani's presentation on CSS Performance Tooling](https://speakerdeck.com/addyosmani/css-performance-tooling)). Either use something smaller, like [Pure](http://purecss.io/) and [Picnic](http://picnicss.com/), or roll your own. You're on a much smaller screen, with less clutter - you need less boilerplate.
 
 <!-- more -->
 
