@@ -181,7 +181,7 @@ blockquote p {
   color: #7a7a7a;
   text-indent: -0.4em;
 }
-blockquote ol, ul {
+blockquote ol, blockquote ul {
   color: #7a7a7a;
 }
 blockquote p:before {
@@ -487,6 +487,10 @@ a:focus {
 
 .single-post .post h1 {
   font-size: 32px;
+}
+
+.post img {
+  max-width: 100%;
 }
 
 

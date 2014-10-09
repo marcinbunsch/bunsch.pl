@@ -1,4 +1,4 @@
 all:
-	jekyll serve
+	jekyll serve --drafts
 build:
-	jekyll build
+	jekyll build --drafts
