@@ -14,6 +14,7 @@
     <div class="content container">
 
       <div class="post">
+        <a class="back" href="/">&lt; Back to home</a>
         <span class="post-date">{{ page.date | date_to_string }}</span>
         <h1>{{ page.title }}</h1>
         {{ content }}
@@ -47,5 +48,6 @@
     </div>
 
     {% include analytics.html %}
+    {% include footer.html %}
   </body>
 </html>

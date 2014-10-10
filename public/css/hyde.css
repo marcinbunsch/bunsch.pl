@@ -356,8 +356,8 @@ a:focus {
     bottom: 0;
     width: 25%;
     margin-bottom: 0;
-  background-image: url("../images/bg4.jpg");
-  background-size: cover;
+    background-image: url("../images/bg4.jpg");
+    background-size: cover;
   }
   .masthead-inner {
     position: absolute;
@@ -472,6 +472,11 @@ a:focus {
 
 .single-post .post {
   margin-top: 20px;
+}
+
+.single-post a.back {
+  position: relative;
+  top: -20px;
 }
 
 @media (min-width: 990px) {
