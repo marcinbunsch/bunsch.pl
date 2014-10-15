@@ -21,7 +21,7 @@ I see Service Objects as a mutation of the Command pattern. They allow separatio
 
 ### Hello method_struct
 
-At Base CRM, we're implementing Service Objects using the [method_struct](https://github.com/basecrm/method_struct) gem. Let's go through an example which illustrates the benefits of this approach.
+At [Base Lab](http://lab.getbase.com), we're implementing Service Objects using the [method_struct](https://github.com/basecrm/method_struct) gem. Let's go through an example which illustrates the benefits of this approach.
 
 <!-- more -->
 
