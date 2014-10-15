@@ -23,6 +23,8 @@ I see Service Objects as a mutation of the Command pattern. They allow separatio
 
 At Base CRM, we're implementing Service Objects using the [method_struct](https://github.com/basecrm/method_struct) gem. Let's go through an example which illustrates the benefits of this approach.
 
+<!-- more -->
+
 Consider the following example. We have a blog app with a Post model, having a title and body attributes. Let's look at the create method in the Posts controller:
 
 {% highlight ruby %}
