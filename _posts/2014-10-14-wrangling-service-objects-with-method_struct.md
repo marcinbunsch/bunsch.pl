@@ -26,6 +26,7 @@ At Base CRM, we're implementing Service Objects using the [method_struct](https:
 Consider the following example. We have a blog app with a Post model, having a title and body attributes. Let's look at the create method in the Posts controller:
 
 {% highlight ruby %}
+# app/controllers/posts_controller.rb
 class PostsController < ApplicationController
 
   def create
@@ -52,6 +53,7 @@ There's plenty happening here. The post is created and indexed, tweet is publish
 There's even more happening in the spec, which is mostly generated from a scaffold, but also tests tweeting and indexing:
 
 {% highlight ruby %}
+# spec/controllers/posts_controller_spec.rb
 require "rails_helper"
 
 describe PostsController do
@@ -110,24 +112,33 @@ end
 
 ### Refactoring extravaganza
 
-Let's see how we can clean this up using Service Objects. Let's move all the logic connected with creating the post and subsequent operations to a method_struct.
+Let's see how we can clean this up using Service Objects. Let's move all the logic connected with creating the post and subsequent operations to a method_struct. The result of method_struct is a regular Ruby class, which means we can program it as such, with removed boilerplate of constructor and accessors.
 
 {% highlight ruby %}
 # app/services/post_creator.rb
 class PostCreator < MethodStruct.new(:current_user, :post_params)
 
   def call
-    @post = Post.new(post_params)
+    post = Post.new(post_params)
 
-    if @post.save
-      twitter = TwitterClient.new(current_user)
-      twitter.tweet "Blogged: #{@post.title}"
-
-      search = SearchClient.new
-      search.index @post
+    if post.save
+      publish_to_twitter(post)
+      index_post(post)
     end
 
-    @post
+    post
+  end
+
+  private
+
+  def publish_to_twitter(post)
+    twitter = TwitterClient.new(current_user)
+    twitter.tweet "Blogged: #{post.title}"
+  end
+
+  def index_post(post)
+    search = SearchClient.new
+    search.index post
   end
 
 end
@@ -136,18 +147,38 @@ end
 When specyfing a new Service Object with method struct, you configure how many parameters it will accept and by what methods will they be accessible. Be default the method name is `call`, but it can be changed, like this:
 
 {% highlight ruby %}
-class PostCreator < MethodStruct.new(:current_user, :post_params, :method_name => :create)
+# app/services/post_creator.rb
+class PostCreator < MethodStruct.new(:current_user, :post_params, {
+  :method_name => :create
+})
 
   def create
     ...
   end
 
 end
+
+class PostCreator < MethodStruct.new(:current_user, :post_params)
+
+  def call
+    post = Post.new(post_params)
+
+    if post.save
+      TwitterPublisher.tweet(current_user, post)
+      PostIndexer.index(post)
+    end
+
+    post
+  end
+
+end
+
 {% endhighlight %}
 
 The business logic of creating new Posts is now handled by PostCreator, allowing us to test it as a regular ruby object:
 
 {% highlight ruby %}
+# spec/services/post_creator_spec.rb
 require "rails_helper"
 
 describe PostCreator do
@@ -200,7 +231,7 @@ describe PostCreator do
 end
 {% endhighlight %}
 
-The killer feature of method_struct is the automatic creation of the class method which streamlines the creation of an instance and calling of the method. So instead of:
+The killer feature of method_struct is the automatic defining of the class method, which streamlines the creation of an instance and calling of the method at the same time. So instead of:
 
 {% highlight ruby %}
 PostCreator.new(current_user, post_params).create
@@ -217,6 +248,7 @@ PostCreator.create(current_user, post_params)
 At this point, we've extracted the logic completely from the controller, dialing down its responsibility to redirecting or showing the form with errors. Let's take a look at how the controller looks like now:
 
 {% highlight ruby %}
+# app/controllers/posts_controller.rb
 class PostsController < ApplicationController
 
   def create
@@ -234,6 +266,7 @@ end
 Much better! It's only doing one thing - it decides where to send the user based on the result of `PostCreator.create`. After this refactoring the specs still work, so let's update them to test only the required part, which is redirection. Notice that having the class method shortcut for `create` makes it trivial to mock the response and test the controller in isolation.
 
 {% highlight ruby %}
+# spec/controllers/posts_controller_spec.rb
 require "rails_helper"
 
 describe PostsController do
@@ -249,16 +282,17 @@ describe PostsController do
 
   describe "POST create" do
 
-    let(:created_post) { Post.new }
     before do
       allow(PostCreator).to receive_messages(:create => created_post)
     end
 
     describe "with valid params" do
 
+      let(:created_post) { Post.create(valid_attributes) }
+
       it "redirects to the created post" do
         post :create, {:post => valid_attributes}, valid_session
-        expect(response).to redirect_to(Post.last)
+        expect(response).to redirect_to(created_post)
       end
 
     end
@@ -268,4 +302,4 @@ end
 
 ### The wrap up
 
-The beauty of Service Object pattern is that we can keep going. We could extract the logic from the PostCreator by moving tweeting and indexing into their own Service Objects, each with a single responsibility. If you want to have a go at it, here's a sample application which houses the code samples from this post.
+The beauty of Service Object pattern is that we can keep going. We could extract the logic from the PostCreator by moving tweeting and indexing into their own Service Objects, each with a single responsibility. If you want to have a go at it, [here's a sample application](https://github.com/marcinbunsch/service-objects-example) which houses the code samples from this post.
